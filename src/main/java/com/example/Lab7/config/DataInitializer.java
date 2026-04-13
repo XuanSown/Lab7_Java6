@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 @Configuration
 public class DataInitializer {
-    @Bean
     public CommandLineRunner seedSampleData(
             CategoryRepository categoryRepository,
             ProductRepository productRepository) {
