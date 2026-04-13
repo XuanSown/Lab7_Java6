@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
     baseURL: 'http://localhost:8080/api',
-    timeout: 1000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -32,8 +32,8 @@ api.interceptors.response.use(
 export const categoryApi = {
     getAll: () => api.get('/categories'),
     getById: id => api.get(`/categories/${id}`),
-    create: category => api.post('/categories', data),
-    update: (id, category) => api.put(`/categories/${id}`, data),
+    create: category => api.post('/categories', category),
+    update: (id, category) => api.put(`/categories/${id}`, category),
     delete: id => api.delete(`/categories/${id}`)
 }
 
@@ -42,7 +42,10 @@ export const productApi = {
     getAll: (categoryId = null) =>{
         const params = categoryId ? {categoryId} : {}
         return api.get('/products', {params})
-    }
+    },
+    create: product => api.post('products',product),
+    update: (id, product) => api.put(`/products/${id}`, product),
+    delete: id => api.delete(`/products/${id}`)
 }
 
 export default api
